@@ -1,20 +1,37 @@
-import { BsCart3 } from "react-icons/bs";
+import React from "react";
+import { Button, Badge } from "@mui/material";
+import { BsCart2 } from "react-icons/bs";
 
 const Navbar = () => {
-  return (
-    <div>
-      <h4>Imagen</h4>
-      <ul>
-        <li>Institucional</li>
-        <li>Historia</li>
-        <li>Contactos</li>
-      </ul>
-      <div>
-        <BsCart3 color="red" size="35px" />
-        <span>1</span>
-      </div>
-    </div>
-  );
+  const menuItems = [
+    { id: 1, title: "Inicio", link: "#" },
+    { id: 2, title: "Acerca de", link: "#" },
+    { id: 3, title: "Servicios", link: "#" },
+    { id: 4, title: "Contacto", link: "#" },
+    { id: 5, title: "", link: "#", icon: <BsCart2 />, badge: 1 },
+  ];
+
+  const renderMenuItems = () => {
+    return menuItems.map((item) => (
+      <Button
+        key={item.id}
+        color="inherit"
+        href={item.link}
+        startIcon={item.icon}
+      >
+        {item.title}
+        {item.badge && (
+          <Badge
+            color="error"
+            badgeContent={item.badge}
+            sx={{ marginLeft: "0.5rem" }}
+          />
+        )}
+      </Button>
+    ));
+  };
+
+  return <React.Fragment>{renderMenuItems()}</React.Fragment>;
 };
 
 export default Navbar;

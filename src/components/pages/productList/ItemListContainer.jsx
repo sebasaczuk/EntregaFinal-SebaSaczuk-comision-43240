@@ -2,16 +2,17 @@ export const ItemListContainer = ({ Precio, Cantidad }) => {
   //console.log(props);
   return (
     <>
-      <h1>Productos</h1>
-      <h3>
+      <br />
+      <div>Productos</div>
+      <div>
         Algodon / Precio $ {Precio} / Disponibilidad: {Cantidad}
-      </h3>
-      <h3>
+      </div>
+      <div>
         Gasa / Precio $ {Precio} / Disponibilidad: {Cantidad}
-      </h3>
-      <h3>
+      </div>
+      <div>
         Jeringas / Precio $ {Precio} / Disponibilidad: {Cantidad}
-      </h3>
+      </div>
     </>
   );
 };
