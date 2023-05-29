@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Badge } from "@mui/material";
-import { BsCart2 } from "react-icons/bs";
+import CartWidget from "./CartWidget";
 
 const Navbar = () => {
   const menuItems = [
@@ -8,7 +8,7 @@ const Navbar = () => {
     { id: 2, title: "Acerca de", link: "#" },
     { id: 3, title: "Servicios", link: "#" },
     { id: 4, title: "Contacto", link: "#" },
-    { id: 5, title: "", link: "#", icon: <BsCart2 />, badge: 1 },
+    { id: 5, title: "", link: "#", icon: <CartWidget badge={1} /> },
   ];
 
   const renderMenuItems = () => {
