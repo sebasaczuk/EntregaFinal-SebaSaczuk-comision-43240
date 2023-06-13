@@ -11,7 +11,15 @@ const App = () => {
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            PharmaStock
+            <a
+              href="http://localhost:5173"
+              style={{
+                textDecoration: "none",
+                color: "inherit",
+              }}
+            >
+              Pharmastock
+            </a>
           </Typography>
           <Navbar />
         </Toolbar>
