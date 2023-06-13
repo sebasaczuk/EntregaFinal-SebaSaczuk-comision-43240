@@ -1,17 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import {
   Card,
   CardContent,
   CardMedia,
   Typography,
-  makeStyles,
+  Button,
+  Box,
 } from "@material-ui/core";
+import "./ItemListContainer.css";
+//import ibupiracImage from "../assets/img/ibupirac.jpg";
 
-// Productos que voy a mostrar...
 const products = [
   {
-    name: "Ibupirac Antigripal Comprimidos",
+    name: "Ibupirac",
     image: "../src/assets/img/ibupirac.jpg",
     category: "Medicamentos",
     description: "IBUPROFENO + CLORFENIRAMINA + FENILEFRINA",
@@ -30,43 +32,70 @@ const products = [
   },
 ];
 
-// Ajusto las imagenes en las cards
-const useStyles = makeStyles({
-  media: {
-    width: 90,
-    height: 90,
-    margin: "auto",
-  },
-});
-
 const ItemListContainer = () => {
-  const classes = useStyles();
+  const [selectedCategory, setSelectedCategory] = useState(null);
+
+  const handleCategoryChange = (category) => {
+    setSelectedCategory(category);
+  };
+
+  const filteredProducts = selectedCategory
+    ? products.filter((product) => product.category === selectedCategory)
+    : products;
 
   return (
     <div>
-      {products.map((product, index) => (
-        <Link
-          to={{ pathname: `/product/${index}`, state: { product } }}
-          key={index}
-          style={{ textDecoration: "none" }}
+      <h3 className="filter-heading">Filtrar por Categoría</h3>
+      <div className="button-container">
+        <Button
+          className="filter-button"
+          variant="contained"
+          onClick={() => handleCategoryChange(null)}
         >
-          <Card>
-            <CardMedia
-              className={classes.media}
-              component="img"
-              image={product.image}
-              alt={product.name}
-            />
-            <CardContent>
-              <Typography variant="h6">{product.name}</Typography>
-              <Typography variant="body2" color="textSecondary">
-                Categoría: {product.category}
-              </Typography>
-              <Typography variant="body2">{product.description}</Typography>
-            </CardContent>
-          </Card>
-        </Link>
-      ))}
+          Todos
+        </Button>
+        <Button
+          className="filter-button"
+          variant="contained"
+          onClick={() => handleCategoryChange("Medicamentos")}
+        >
+          Medicamentos
+        </Button>
+        <Button
+          className="filter-button"
+          variant="contained"
+          onClick={() => handleCategoryChange("Electro")}
+        >
+          Electro
+        </Button>
+      </div>
+      <div className="card-container">
+        {filteredProducts.map((product, index) => (
+          <Link
+            to={{ pathname: `/product/${index}`, state: { product: product } }}
+            key={index}
+            style={{ textDecoration: "none" }}
+          >
+            <Box className="card-container">
+              <Card className="card">
+                <CardMedia
+                  className="media"
+                  component="img"
+                  image={product.image}
+                  alt={product.name}
+                />
+                <CardContent>
+                  <Typography variant="h6">{product.name}</Typography>
+                  <Typography variant="body2" color="textSecondary">
+                    Categoría: {product.category}
+                  </Typography>
+                  <Typography variant="body2">{product.description}</Typography>
+                </CardContent>
+              </Card>
+            </Box>
+          </Link>
+        ))}
+      </div>
     </div>
   );
 };
