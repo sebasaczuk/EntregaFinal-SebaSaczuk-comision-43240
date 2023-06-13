@@ -1,14 +1,11 @@
-//import React from "react";
+import React from "react";
 import Navbar from "./components/layout/navbar/Navbar";
-import { ItemListContainer } from "./components/pages/productList/ItemListContainer";
-import { GetGreeting } from "./components/pages/GetGreeting";
+import ItemListContainer from "../src/components/pages/productList/ItemListContainer";
+import ProductDetails from "../src/components/pages/productDetails/ProductDetails";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Container, Typography, AppBar, Toolbar, Button } from "@mui/material";
 
-function App() {
-  let Precio = "100";
-  let Cantidad = "3";
-  let Saludo = "Bienvenido";
-
+const App = () => {
   return (
     <Container>
       <AppBar position="static">
@@ -20,11 +17,16 @@ function App() {
         </Toolbar>
       </AppBar>
       <Typography variant="div" sx={{ mt: 2 }}>
-        <GetGreeting Saludo={Saludo} />
-        <ItemListContainer Precio={Precio} Cantidad={Cantidad} />
+        <br />
+        <Router>
+          <Routes>
+            <Route path="/" element={<ItemListContainer />} />
+            <Route path="/product/:id" element={<ProductDetails />} />
+          </Routes>
+        </Router>
       </Typography>
     </Container>
   );
-}
+};
 
 export default App;
