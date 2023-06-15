@@ -8,25 +8,33 @@ import {
   Button,
   Box,
 } from "@material-ui/core";
+import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline"; // Importo el icono AddCircleOutline para el Widget Plus de las Cards
 import "./ItemListContainer.css";
-//import ibupiracImage from "../assets/img/ibupirac.jpg";
+// Importo las imagenes de los productos
+import ibupiracImage from "../img/ibupiracImage.jpg";
+import geniolImage from "../img/geniolImage.jpg";
+import balanzaImage from "../img/balanzaImage.jpg";
 
+//Armo el Array con la info de los productos
 const products = [
   {
+    id: 1,
     name: "Ibupirac",
-    image: "../src/assets/img/ibupirac.jpg",
+    image: ibupiracImage,
     category: "Medicamentos",
     description: "IBUPROFENO + CLORFENIRAMINA + FENILEFRINA",
   },
   {
+    id: 2,
     name: "Geniol Paracetamol Forte 650",
-    image: "../src/assets/img/geniol.jpg",
+    image: geniolImage,
     category: "Medicamentos",
     description: "PARACETAMOL RAPIDA ACCION COMPRIMIDOS X12",
   },
   {
+    id: 3,
     name: "Balanza Electronica hasta 180kgs",
-    image: "../src/assets/img/balanza.jpg",
+    image: balanzaImage,
     category: "Electro",
     description: "Balanza Cristal Electronica hasta 180kgs a Pilas AA",
   },
@@ -34,7 +42,7 @@ const products = [
 
 const ItemListContainer = () => {
   const [selectedCategory, setSelectedCategory] = useState(null);
-
+  // Filtrar los productos según la categoría elegida
   const handleCategoryChange = (category) => {
     setSelectedCategory(category);
   };
@@ -70,10 +78,10 @@ const ItemListContainer = () => {
         </Button>
       </div>
       <div className="card-container">
-        {filteredProducts.map((product, index) => (
+        {filteredProducts.map((product) => (
           <Link
-            to={{ pathname: `/product/${index}`, state: { product: product } }}
-            key={index}
+            to={`/product/${product.id}`}
+            key={product.id}
             style={{ textDecoration: "none" }}
           >
             <Box className="card-container">
@@ -91,6 +99,10 @@ const ItemListContainer = () => {
                   </Typography>
                   <Typography variant="body2">{product.description}</Typography>
                 </CardContent>
+                <Box className="widget-container">
+                  <AddCircleOutlineIcon className="widget" />{" "}
+                  {/* Aun no tiene accion, pero ya dejo agregado el icono "+"" AddCircleOutline en las Cards */}
+                </Box>
               </Card>
             </Box>
           </Link>
