@@ -1,24 +1,14 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import {
-  Card,
-  CardContent,
-  CardMedia,
-  Typography,
-  Button,
-  TextField,
-} from "@material-ui/core";
+import { Card, CardContent, CardMedia, Typography } from "@material-ui/core";
 import "./ProductDetails.css";
 import { db } from "../../../firebaseConfig";
 import { doc, getDoc } from "firebase/firestore";
-import { CartContext } from "../../../context/CartContext";
 
 const ProductDetails = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [quantity, setQuantity] = useState(1);
-  const { addToCart } = useContext(CartContext);
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -35,14 +25,6 @@ const ProductDetails = () => {
 
     fetchProduct();
   }, [id]);
-
-  const handleQuantityChange = (event) => {
-    setQuantity(event.target.value);
-  };
-
-  const handleAddToCart = () => {
-    addToCart({ ...product, quantity });
-  };
 
   if (loading) {
     return <div className="product-details-container">Cargando...</div>;
@@ -64,24 +46,6 @@ const ProductDetails = () => {
               Categoría: {product.category}
             </Typography>
             <Typography variant="body2">{product.description}</Typography>
-            <Typography variant="body2">Precio: ${product.price}</Typography>
-            <Typography variant="body2">
-              Stock disponible: {product.stock}
-            </Typography>
-            <TextField
-              type="number"
-              InputProps={{ inputProps: { min: 1, max: product.stock } }}
-              value={quantity}
-              onChange={handleQuantityChange}
-            />
-            <Button
-              variant="contained"
-              color="primary"
-              disabled={product.stock === 0}
-              onClick={handleAddToCart}
-            >
-              Agregar al carrito
-            </Button>
           </CardContent>
         </Card>
       ) : (

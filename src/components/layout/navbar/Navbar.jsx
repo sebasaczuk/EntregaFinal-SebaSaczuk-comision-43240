@@ -1,14 +1,23 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Button, Badge } from "@mui/material";
+import { Link } from "react-router-dom";
 import CartWidget from "./CartWidget";
+import { CartContext } from "../../../context/CartContext";
 
 const Navbar = () => {
+  const { getTotalItems } = useContext(CartContext);
+
   const menuItems = [
-    { id: 1, title: "Inicio", link: "#" },
-    { id: 2, title: "Acerca de", link: "#" },
-    { id: 3, title: "Servicios", link: "#" },
-    { id: 4, title: "Contacto", link: "#" },
-    { id: 5, title: "", link: "#", icon: <CartWidget badge={1} /> },
+    { id: 1, title: "Inicio", link: "/" },
+    { id: 2, title: "Acerca de", link: "/about" },
+    { id: 3, title: "Servicios", link: "/services" },
+    { id: 4, title: "Contacto", link: "/contact" },
+    {
+      id: 5,
+      title: "",
+      link: "/cart",
+      icon: <CartWidget badge={getTotalItems()} />,
+    },
   ];
 
   const renderMenuItems = () => {
@@ -16,7 +25,8 @@ const Navbar = () => {
       <Button
         key={item.id}
         color="inherit"
-        href={item.link}
+        component={Link}
+        to={item.link}
         startIcon={item.icon}
       >
         {item.title}

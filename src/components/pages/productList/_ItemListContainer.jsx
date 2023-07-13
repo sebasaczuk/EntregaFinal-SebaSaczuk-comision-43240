@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import {
   Card,
@@ -8,28 +8,41 @@ import {
   Button,
   Box,
 } from "@material-ui/core";
-import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
+import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline"; // Importo el icono AddCircleOutline para el Widget Plus de las Cards
 import "./ItemListContainer.css";
-import { db } from "../../../firebaseConfig";
-import { collection, getDocs } from "firebase/firestore";
+// Importo las imagenes de los productos
+import ibupiracImage from "../img/ibupiracImage.jpg";
+import geniolImage from "../img/geniolImage.jpg";
+import balanzaImage from "../img/balanzaImage.jpg";
+
+//Armo el Array con la info de los productos
+const products = [
+  {
+    id: 1,
+    name: "Ibupirac",
+    image: ibupiracImage,
+    category: "Medicamentos",
+    description: "IBUPROFENO + CLORFENIRAMINA + FENILEFRINA",
+  },
+  {
+    id: 2,
+    name: "Geniol Paracetamol Forte 650",
+    image: geniolImage,
+    category: "Medicamentos",
+    description: "PARACETAMOL RAPIDA ACCION COMPRIMIDOS X12",
+  },
+  {
+    id: 3,
+    name: "Balanza Electronica hasta 180kgs",
+    image: balanzaImage,
+    category: "Electro",
+    description: "Balanza Cristal Electronica hasta 180kgs a Pilas AA",
+  },
+];
 
 const ItemListContainer = () => {
   const [selectedCategory, setSelectedCategory] = useState(null);
-  const [products, setProducts] = useState([]);
-
-  useEffect(() => {
-    const fetchItems = async () => {
-      const data = await getDocs(collection(db, "products"));
-      if (data.size === 0) {
-        console.log("Sin resultados");
-      } else {
-        setProducts(data.docs.map((doc) => ({ id: doc.id, ...doc.data() })));
-      }
-    };
-
-    fetchItems();
-  }, []);
-
+  // Filtrar los productos según la categoría elegida
   const handleCategoryChange = (category) => {
     setSelectedCategory(category);
   };
@@ -41,7 +54,7 @@ const ItemListContainer = () => {
   return (
     <div>
       <h3 className="filter-heading">Filtrar por Categoría</h3>
-      <div className="button-container2">
+      <div className="button-container">
         <Button
           className="filter-button"
           variant="contained"
@@ -88,6 +101,7 @@ const ItemListContainer = () => {
                 </CardContent>
                 <Box className="widget-container">
                   <AddCircleOutlineIcon className="widget" />{" "}
+                  {/* Aun no tiene accion, pero ya dejo agregado el icono "+"" AddCircleOutline en las Cards */}
                 </Box>
               </Card>
             </Box>
