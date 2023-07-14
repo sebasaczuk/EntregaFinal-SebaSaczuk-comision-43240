@@ -5,11 +5,11 @@ const Checkout = ({ handleSubmit, handleChange, errors }) => {
   return (
     <div style={{ paddingTop: "50px" }}>
       <Typography variant="h4" gutterBottom>
-        Checkout
+        Ingrese sus Datos
       </Typography>
       <form onSubmit={handleSubmit}>
         <TextField
-          label="Name"
+          label="Nombre Completo"
           variant="outlined"
           name="name"
           onChange={handleChange}
@@ -29,7 +29,7 @@ const Checkout = ({ handleSubmit, handleChange, errors }) => {
           margin="normal"
         />
         <TextField
-          label="Phone"
+          label="Telefono"
           variant="outlined"
           name="phone"
           onChange={handleChange}

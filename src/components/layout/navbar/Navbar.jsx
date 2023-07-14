@@ -3,6 +3,7 @@ import { Button, Badge } from "@mui/material";
 import { Link } from "react-router-dom";
 import CartWidget from "./CartWidget";
 import { CartContext } from "../../../context/CartContext";
+import "./Navbar.css"; // Importa el archivo CSS
 
 const Navbar = () => {
   const { getTotalItems } = useContext(CartContext);
@@ -24,7 +25,8 @@ const Navbar = () => {
     return menuItems.map((item) => (
       <Button
         key={item.id}
-        color="inherit"
+        className="navbar-item" // Agrega la clase CSS al botón
+        color="inherit" // Restaura el color a "inherit"
         component={Link}
         to={item.link}
         startIcon={item.icon}
@@ -41,7 +43,7 @@ const Navbar = () => {
     ));
   };
 
-  return <React.Fragment>{renderMenuItems()}</React.Fragment>;
+  return <div className="navbar-container">{renderMenuItems()}</div>;
 };
 
 export default Navbar;

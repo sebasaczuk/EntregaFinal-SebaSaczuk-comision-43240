@@ -1,3 +1,9 @@
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
 .filter-heading {
   text-align: center;
   margin-top: 20px;

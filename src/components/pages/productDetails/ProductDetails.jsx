@@ -7,7 +7,9 @@ import {
   Typography,
   Button,
   TextField,
+  Box,
 } from "@material-ui/core";
+import { FadeLoader } from "react-spinners";
 import "./ProductDetails.css";
 import { db } from "../../../firebaseConfig";
 import { doc, getDoc } from "firebase/firestore";
@@ -45,7 +47,11 @@ const ProductDetails = () => {
   };
 
   if (loading) {
-    return <div className="product-details-container">Cargando...</div>;
+    return (
+      <div className="product-details-container">
+        <FadeLoader color="#1976d2" loading={loading} size={50} />
+      </div>
+    );
   }
 
   return (
@@ -77,7 +83,7 @@ const ProductDetails = () => {
             <Button
               variant="contained"
               color="primary"
-              disabled={product.stock === 0}
+              disabled={product.stock === 0} //Deshabilito cuando llego a 0 stock
               onClick={handleAddToCart}
             >
               Agregar al carrito

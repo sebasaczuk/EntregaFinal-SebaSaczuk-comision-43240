@@ -21,7 +21,7 @@ const CartPage = () => {
           <div className="product-details">
             <h2 className="product-name">{product.name}</h2>
             <p className="product-quantity">Cantidad: {product.quantity}</p>
-            <p className="product-price">Precio: {product.price}</p>
+            <p className="product-price">Precio: ${product.price}</p>
           </div>
           <Button
             className="product-button"

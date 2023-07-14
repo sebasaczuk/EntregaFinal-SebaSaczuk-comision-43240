@@ -9,6 +9,7 @@ import {
   Box,
 } from "@material-ui/core";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
+import { FadeLoader } from "react-spinners";
 import "./ItemListContainer.css";
 import { db } from "../../../firebaseConfig";
 import { collection, getDocs } from "firebase/firestore";
@@ -16,6 +17,7 @@ import { collection, getDocs } from "firebase/firestore";
 const ItemListContainer = () => {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchItems = async () => {
@@ -25,6 +27,7 @@ const ItemListContainer = () => {
       } else {
         setProducts(data.docs.map((doc) => ({ id: doc.id, ...doc.data() })));
       }
+      setLoading(false);
     };
 
     fetchItems();
@@ -37,6 +40,14 @@ const ItemListContainer = () => {
   const filteredProducts = selectedCategory
     ? products.filter((product) => product.category === selectedCategory)
     : products;
+
+  if (loading) {
+    return (
+      <div className="loading-container">
+        <FadeLoader color="#1976d2" loading={loading} size={50} />
+      </div>
+    );
+  }
 
   return (
     <div>
