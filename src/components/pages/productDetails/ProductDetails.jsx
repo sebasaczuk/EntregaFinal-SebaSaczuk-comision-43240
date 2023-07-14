@@ -22,11 +22,13 @@ const ProductDetails = () => {
   const [quantity, setQuantity] = useState(1);
   const { addToCart } = useContext(CartContext);
 
+  // Obtengo el documento del producto desde Firestore
   useEffect(() => {
     const fetchProduct = async () => {
       const productRef = doc(db, "products", id);
       const productDoc = await getDoc(productRef);
 
+      // Si el producto existe, establezco el estado del producto
       if (productDoc.exists()) {
         setProduct({ id: productDoc.id, ...productDoc.data() });
       } else {
@@ -38,6 +40,7 @@ const ProductDetails = () => {
     fetchProduct();
   }, [id]);
 
+  // Actualizo el estado de la cantidad
   const handleQuantityChange = (event) => {
     setQuantity(event.target.value);
   };
@@ -46,6 +49,7 @@ const ProductDetails = () => {
     addToCart({ ...product, quantity });
   };
 
+  // Mostrar el spinner mientras traigo el producto (esto me dio unos dolores de cabeza con los estilos...)
   if (loading) {
     return (
       <div className="product-details-container">

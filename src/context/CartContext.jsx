@@ -3,9 +3,6 @@ import { createContext, useState } from "react";
 
 export const CartContext = createContext();
 
-// localStorage.getItem("cart")
-// localStorage.setItem("cart", [])
-
 // creo el componente proveedor del contexto
 const CartContextProvider = ({ children }) => {
   const [cart, setCart] = useState(
@@ -13,7 +10,7 @@ const CartContextProvider = ({ children }) => {
   );
 
   const addToCart = (newProduct) => {
-    // preguntar si existe
+    // Existe?
     let exist = isInCart(newProduct.id);
 
     if (exist) {
@@ -36,7 +33,7 @@ const CartContextProvider = ({ children }) => {
   };
 
   const isInCart = (id) => {
-    // 2
+    //2
     let exist = cart.some((prod) => prod.id === id);
     return exist;
   };

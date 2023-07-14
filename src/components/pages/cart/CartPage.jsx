@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import "./CartPage.css";
 
 const CartPage = () => {
-  const { cart, getTotalItems, getTotalPrice, removeFromCart, clearCart } =
+  const { cart, getTotalItems, getTotalPrice, removeById, clearCart } =
     useContext(CartContext);
   const navigate = useNavigate();
 
@@ -27,7 +27,7 @@ const CartPage = () => {
             className="product-button"
             variant="contained"
             color="primary"
-            onClick={() => removeFromCart(product.id)}
+            onClick={() => removeById(product.id)}
           >
             Eliminar
           </Button>

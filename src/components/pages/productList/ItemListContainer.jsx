@@ -20,6 +20,7 @@ const ItemListContainer = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // Obtengo los documentos de la colección "products" desde Firestore
     const fetchItems = async () => {
       const data = await getDocs(collection(db, "products"));
       if (data.size === 0) {
@@ -41,6 +42,7 @@ const ItemListContainer = () => {
     ? products.filter((product) => product.category === selectedCategory)
     : products;
 
+  // Mostrar el spinner de carga mientras traigo los productos
   if (loading) {
     return (
       <div className="loading-container">
